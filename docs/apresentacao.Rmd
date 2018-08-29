@@ -1,0 +1,239 @@
+---
+title: "Avaliação através da moda, média ou mediana"
+subtitle: "Uma nova abordagem"
+author: 
+ - "Luiz Fernando Palin Droubi"
+ - "Willian Zonato"
+ - "Norberto Hochheim"
+date: "`r Sys.Date()`"
+output:
+  xaringan::moon_reader:
+    yolo: false
+    lib_dir: libs
+    self_contained: TRUE
+    chakra: libs/remark-latest.min.js
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+    css: ["default", "estilo.css"]
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(appraiseR)
+library(quantreg)
+library(texreg)
+library(latex2exp)
+library(leaflet)
+library(sp)
+library(ggplot2)
+library(emo)
+theme_set(theme_bw())
+```
+
+background-image: url(https://raw.githubusercontent.com/lfpdroubi/dist_lognormal/master/images/densidade_medidas-1.png)
+
+---
+
+# Slide #1  
+
+`r emo::ji("smile")`
+
+---
+
+# Distribuição lognormal
+
+```{r lognormal, echo = FALSE, fig.show='animate', fig.width=5, fig.height=4, interval=.1}
+x <- seq(0, 3, 0.05)
+mediana <- 1
+sigma <- seq(1.4, 0.1, -0.1)
+for (s in sigma) {
+  y <- dlnorm(x = x, meanlog = log(1), sdlog = s)
+  data <- data.frame(x, y)
+  media <- mediana*exp(s^2/2)
+  moda <- mediana/exp(s^2)
+  p <- ggplot(data, aes(x = x, y = y)) + geom_line() + 
+    geom_segment(aes(x = media, y = 0, xend = media, 
+                   yend = dlnorm(media, meanlog = log(mediana), sdlog = s),
+                   colour = "Média")) +
+    geom_segment(aes(x = mediana, y = 0, xend = mediana,
+                   yend = dlnorm(mediana, meanlog = log(mediana), sdlog = s),
+                   colour = "Mediana")) +
+    geom_segment(aes(x = moda, y = 0, xend = moda, 
+                   yend = dlnorm(moda, meanlog = log(mediana), sdlog = s),
+                   colour = "Moda"))
+  print(p)
+}
+```
+
+
+---
+# Regressão linear clássica
+
+## Origem
+
+> The word “regression” is an allusion to the famous comment of Sir Francis Galton in the late 1800s regarding “regression toward the mean.” This referred to the fact that tall parents tend to have children who are less tall closer to the mean – with a similar statement for short parents. The predictor variable here might be, say, the father’s height F, with the response variable being, say, the son’s height S. Galton was saying that E(S|F) < F.
+
+## Definição precisa
+
+$$m_{Y ;X}(t) = \mathbb{E}(Y |X = t)$$
+## Notação
+
+$$\mu(t) = \beta_0 + \beta_1t_1 + ... + \beta_pt_p$$
+
+$$\epsilon = Y - \mu(X)$$
+
+$$Y = \beta_0 + \beta_1t_1+ ... +\beta_pt_p+\epsilon$$
+
+???
+
+MATLOFF, N. S. From Algorithms to Z-Scores: Probabilistic and statistical modeling in computer science. Davis, California: Orange Grove Books, 2009.
+
+p. 386
+
+[ProbStatBook](http://heather.cs.ucdavis.edu/~matloff/132/PLN/probstatbook/ProbStatBook.pdf)
+
+---
+
+# $\mu(t)$ minimiza MSPE
+
+## Prova
+
+1. c constante.
+
+$$\mathbb{E}[(W - c)^2] = E[W^2-2cW+c^2] = E(W^2) - 2cE[W]+c^2$$
+
+$$\frac{d \mathbb{E}[(W - c)^2]}{dc} = 0\rightarrow 2E[W] + 2c = 0$$
+
+$$\Leftrightarrow c = E[W]$$
+
+2. $c = f(X)$
+
+$$MSPE = \mathbb{E}[(Y-f(X))^2] = \mathbb{E}[\mathbb{E}[(Y-f(X))^2|X]$$
+A função $f(X)$ que minimiza $\mathbb{E}[(Y-f(X))^2]$, por analogia ao item anterior, é a função $E(Y|X)$, ou seja, a média, *i.e.* $\mu(t)$. Então, a expectativa total $\mathbb{E}[\mathbb{E}[(Y-f(X))^2|X]$, também é minimizada com este valor.
+
+---
+
+# Regressão à mediana
+
+$$\mathbb{E}[|Y - m|] = \int_{-\infty}^{\infty}|t-m|f_Y(t)dt$$
+Pode-se provar que o valor que minimiza $\mathbb{E}[|Y - m|]$ é a $mediana(Y)$.
+
+---
+
+# Regressão à moda
+
+
+
+---
+
+# Exemplo
+
+*Florianópolis -- Centro 2015
+
+```{r, echo = FALSE, out.width='100%', fig.height=6, eval=require('leaflet')}
+data(centro_2015)
+centro_2015 <- spTransform(centro_2015, CRS("+init=epsg:4326"))
+leaflet(centro_2015) %>% 
+  addProviderTiles(providers$CartoDB.Positron) %>% 
+  addCircleMarkers(color = ~ifelse(padrao == "baixo", "green", 
+                                   ifelse(padrao == "medio", "blue", "red")),
+                   radius = ~10*as.vector(scale(valor)),
+                   popup = as.character(1:50),
+                   label = as.character(1:50),
+                   fillOpacity = 0.5)
+```
+
+---
+
+```{r, echo = FALSE, warning=FALSE}
+dados <- centro_2015@data
+dados$padrao <- as.numeric(dados$padrao)
+fit <- lm(log(valor) ~ area_total + quartos + suites + garagens + 
+            log(dist_b_mar) + I(padrao^-1), 
+          data = dados)
+mfit <- rq(log(valor) ~ area_total + quartos + suites + garagens + 
+             log(dist_b_mar) + + I(padrao^-1), 
+           data = dados, tau = 0.5)
+s <- summary(fit)
+```
+
+```{r, echo = FALSE, results='asis', warning=FALSE}
+htmlreg(list(fit, mfit), doctype = FALSE,
+        single.row = TRUE, 
+        include.bic = TRUE,
+        caption.above = TRUE, digits = 3,
+        ci.force = TRUE)
+```
+
+---
+class: middle, center, inverse
+
+# Estimativas
+
+```{r, echo = FALSE}
+p <- predict(fit)
+pm <- predict(mfit)
+```
+
+---
+
+# OLS - Moda
+
+```{r, echo = FALSE, dev='CairoSVG', fig.show="hold", fig.height=5}
+par(mar = c(5,5,4,2))
+plot(exp(fit$fitted.values - s$sigma^2) ~ exp(fit$model[, 1]), 
+     xlim = c(0, 3500000), ylim = c(0, 3500000),
+     ylab = TeX("\\hat{Y}_{moda}"), xlab = "Y", pch = 19, cex = .75,
+     main = "Estimação pela moda")
+abline(0, 1)
+abline(lm(exp(fit$fitted.values - s$sigma^2) ~ exp(fit$model[, 1])), lty = 2)
+```
+
+---
+
+# OLS - Mediana
+
+```{r, echo = FALSE, dev='CairoSVG', fig.show="hold", fig.height=5}
+par(mar = c(5,5,4,2))
+plot(exp(fit$fitted.values) ~ exp(fit$model[, 1]), 
+     xlim = c(0, 3500000), ylim = c(0, 3500000),
+     ylab = TeX("\\hat{Y}_{mediana}"), xlab = "Y", pch = 19, cex = .75,
+     main = "Estimação pela mediana")
+abline(0, 1)
+abline(lm(exp(fit$fitted.values) ~ exp(fit$model[, 1])), lty = 2)
+```
+
+
+---
+
+# OLS - Média
+
+```{r, echo = FALSE, dev='CairoSVG', fig.show="hold", fig.height=5}
+par(mar = c(5,5,4,2))
+plot(exp(fit$fitted.values + .5*s$sigma^2) ~ exp(fit$model[, 1]), 
+     xlim = c(0, 3500000), ylim = c(0, 3500000),
+     ylab = TeX("\\hat{Y}_{media}"), xlab = "Y", pch = 19, cex = .75,
+     main = "Estimação pela média")
+abline(0, 1)
+abline(lm(exp(fit$fitted.values + .5*s$sigma^2) ~ exp(fit$model[, 1])), lty = 2)
+```
+
+
+---
+# QR
+
+```{r, echo = FALSE,  dev='CairoSVG', fig.height=5}
+par(mar = c(5,5,4,2))
+plot(exp(mfit$fitted.values) ~ exp(mfit$model[, 1]), 
+     xlim = c(0, 3500000), ylim = c(0, 3500000),
+     ylab = TeX("\\hat{Y}_{mediana}"), xlab = "Y", pch = 19, cex = .75,
+     main = "Estimação pela regressão à mediana")
+abline(0,1)
+abline(lm(exp(mfit$fitted.values) ~ exp(mfit$model[,1])), lty = 2)
+```
+
+---
+
+`r emo::ji("money")`
