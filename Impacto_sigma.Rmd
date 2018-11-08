@@ -17,15 +17,18 @@ bibliography: bibliography.bib
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
 library(appraiseR)
 library(mosaic)
 trellis.par.set(theme=theme.mosaic()) # change default color scheme for lattice
 library(ggplot2)
+theme_set(theme_bw())
+library(latex2exp)
 library(reshape2)
 library(quantreg)
 library(tidyverse)
 library(fitdistrplus)
+library(stargazer)
 ```
 
 # INTRODUÇÃO
@@ -39,176 +42,172 @@ data(centro_2015)
 dados <- centro_2015@data
 dados <- dados[complete.cases(dados), ]
 x <- exp(mean(log(dados$valor)))
-s <-exp(sqrt(sum(log(dados$valor/x)^2)/length(dados$valor)))
+s <- exp(sqrt(sum(log(dados$valor/x)^2)/length(dados$valor)))
 f1 <- fitdist(dados$valor, "lnorm", method = "mle")
 ```
 
 * Hochheim [@hochheim, 21]: $s^* =$ `r format(round(s, 3), decimal.mark = ",")`.
 
-# EXEMPLO 1
+```{r, fig.keep='last'}
+histogram(dados$valor)
+plotDist("lnorm", 
+         meanlog = log(x),
+         sdlog = log(s), 
+         add = TRUE)
+```
 
-## GERAÇÃO DE DADOS RANDÔMICOS
+
+# EXEMPLOS DE APLICAÇÃO
+
+## EXEMPLO 1
+
+### GERAÇÃO DE DADOS LOGNORMAIS COM $s^* = 1,1$
 
 ```{r}
 set.seed(1)
-x <- seq(1, 100, 0.5)
-y <- exp(x/25 + rnorm(199, sd = .1)) 
-```
-
-## GRÁFICOS
-
-```{r}
-plot(log(y) ~ x)
-```
-
-```{r, fig.keep='last'}
-histogram(y)
-plotDist("lnorm", 
-         meanlog = mean(log(y), na.rm = TRUE),
-         sdlog = sd(log(y), na.rm = TRUE), 
-         add = TRUE)
-```
-
-
-## MODELO
-
-```{r}
+x <- runif(200, 10, 100)
+y <- exp(x/8 + rnorm(200, 0, log(1.1))) 
+data <- data.frame(x, y)
 fit <- lm(log(y) ~ x)
 s <- summary(fit)
-s
 ```
 
-# EXEMPLO 2
+### GRÁFICOS
+
+```{r}
+p <- ggplot(data, aes(x = x, y = y)) + 
+  scale_y_continuous(trans = "log") +
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  ggtitle("ln(y) vs. x", subtitle = TeX("$\\sigma^* = 1,1$"))
+```
+
+## EXEMPLO 2
 
 Mantido mesmo vetor x criado anteriormente.
 
-## GERAÇÃO DE DADOS RANDÔMICOS
+### GERAÇÃO DE DADOS LOGNORMAIS COM $s^* = 1,25$
 
 ```{r}
-y1 <- exp(x/25 + rnorm(199, sd = .25)) 
-```
-
-## GRÁFICOS
-
-```{r}
-plot(log(y1) ~ x)
-```
-
-```{r, fig.keep='last'}
-histogram(y1)
-plotDist("lnorm", 
-         meanlog = mean(log(y1), na.rm = TRUE),
-         sdlog = sd(log(y1), na.rm = TRUE), 
-         add = TRUE)
-```
-
-## MODELO
-
-```{r}
+y1 <- exp(x/8 + rnorm(200, 0, log(1.25))) 
 fit1 <- lm(log(y1) ~ x)
 s1 <- summary(fit1)
-s1
+data1 <- data.frame(x, y1)
 ```
 
-# EXEMPLO 3
+### GRÁFICOS
+
+```{r}
+p1 <- ggplot(data1, aes(x = x, y = y1)) + 
+  scale_y_continuous(trans = "log") +
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  ggtitle("ln(y2) ~ x", subtitle = TeX("$\\sigma^* = 1,25$"))
+```
+
+## EXEMPLO 3
 
 Mantido mesmo vetor x criado anteriormente.
 
-## GERAÇÃO DE DADOS RANDÔMICOS
+### GERAÇÃO DE DADOS LOGNORMAIS COM $s^* = 1,5$
 
 ```{r}
-y2 <- exp(x/25 + rnorm(199, sd = .5)) 
-```
-
-## GRÁFICOS
-
-```{r}
-plot(log(y2) ~ x)
-```
-
-```{r, fig.keep='last'}
-histogram(y2)
-plotDist("lnorm", 
-         meanlog = mean(log(y2), na.rm = TRUE),
-         sdlog = sd(log(y2), na.rm = TRUE), 
-         add = TRUE)
-```
-
-## MODELO
-
-```{r}
+y2 <- exp(x/8 + rnorm(200, 0, log(1.5)))
+data2 <- data.frame(x, y2)
 fit2 <- lm(log(y2) ~ x)
 s2 <- summary(fit2)
-s2
 ```
 
-# EXEMPLO 4
+### GRÁFICOS
+
+```{r}
+p2 <- ggplot(data2, aes(x = x, y = y2)) + 
+  scale_y_continuous(trans = "log") +
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  ggtitle("ln(y2) ~ x", subtitle = TeX("$\\sigma^* = 1,5$"))
+```
+
+## EXEMPLO 4
 
 Mantido mesmo vetor x criado anteriormente.
 
-## GERAÇÃO DE DADOS RANDÔMICOS
+### GERAÇÃO DE DADOS LOGNORMAIS COM $s^* = 2$
 
 ```{r}
-y3 <- exp(x/25 + rnorm(199, sd = .75)) 
-```
-
-## GRÁFICOS
-
-```{r}
-plot(log(y3) ~ x)
-```
-
-```{r, fig.keep='last'}
-histogram(y3)
-plotDist("lnorm", 
-         meanlog = mean(log(y3), na.rm = TRUE),
-         sdlog = sd(log(y3), na.rm = TRUE), 
-         add = TRUE)
-```
-
-## MODELO
-
-```{r}
+y3 <- exp(x/8 + rnorm(200, 0, log(2))) 
 fit3 <- lm(log(y3) ~ x)
 s3 <- summary(fit3)
-s3
+data3 <- data.frame(x, y3)
 ```
 
-# EXEMPLO 5
+### GRÁFICOS
+
+```{r}
+p3 <- ggplot(data3, aes(x = x, y = y3)) + 
+  scale_y_continuous(trans = "log") +
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  ggtitle("ln(y3) ~ x", subtitle = TeX("$\\sigma^* = 2$"))
+```
+
+## EXEMPLO 5
 
 Mantido mesmo vetor x criado anteriormente.
 
-## GERAÇÃO DE DADOS RANDÔMICOS
+### GERAÇÃO DE DADOS LOGNORMAIS COM $s^* = 3$
 
 ```{r}
-y4 <- exp(x/25 + rnorm(199, sd = 1)) 
-```
-
-## GRÁFICOS
-
-```{r}
-plot(log(y4) ~ x)
-```
-
-```{r, fig.keep='last'}
-histogram(y4)
-plotDist("lnorm", 
-         meanlog = mean(log(y4), na.rm = TRUE),
-         sdlog = sd(log(y4), na.rm = TRUE), 
-         add = TRUE)
-```
-
-## MODELO
-
-```{r}
+y4 <- exp(x/8 + rnorm(200, 0, log(3))) 
 fit4 <- lm(log(y4) ~ x)
 s4 <- summary(fit4)
-s4
+data4 <- data.frame(x, y4)
 ```
 
-# ESTIMATIVAS
+### GRÁFICOS
 
-## Usando o primeiro modelo
+```{r}
+p4 <- ggplot(data4, aes(x = x, y = y4)) + 
+  scale_y_continuous(trans = "log") +
+  geom_point() + 
+  geom_smooth(method = "lm") +
+  ggtitle("ln(y4) ~ x", subtitle = TeX("$\\sigma^* = 3$"))
+```
+
+```{r}
+cowplot::plot_grid(p, p1, p2, p3, p4)
+```
+
+```{r}
+cowplot::plot_grid(p + coord_trans(y = scales::exp_trans()), 
+                   p1 + coord_trans(y = scales::exp_trans()), 
+                   p2 + coord_trans(y = scales::exp_trans()), 
+                   p3 + coord_trans(y = scales::exp_trans()), 
+                   p4 + coord_trans(y = scales::exp_trans()))
+```
+
+
+```{r, fig.keep='last'}
+# histogram(y4)
+# m4 <- exp(mean(log(y4)))
+# s4 <- exp(sqrt(sum(log(y4/m4)^2)/length(y4)))
+# plotDist("lnorm", 
+#          meanlog = log(m4),
+#          sdlog = log(s4), 
+#          add = TRUE)
+```
+
+## MODELOS
+
+```{r, results='asis'}
+stargazer(fit, fit1, fit2, fit3, fit4,
+          header = FALSE, type = "html")
+```
+
+
+## ESTIMATIVAS
+
+### Usando o primeiro modelo
 
 a. Moda
 
@@ -232,7 +231,7 @@ p_media <- exp(p + s$sigma^2/2)
 p_media
 ```
 
-## Usando o segundo modelo
+### Usando o segundo modelo
 
 a. Moda
 
@@ -256,7 +255,7 @@ p1_media <- exp(p1 + s1$sigma^2/2)
 p1_media
 ```
 
-## Usando o terceiro modelo
+### Usando o terceiro modelo
 
 a. Moda
 
@@ -280,7 +279,7 @@ p2_media <- exp(p2 + s2$sigma^2/2)
 p2_media
 ```
 
-## Usando o quarto modelo
+### Usando o quarto modelo
 
 a. Moda
 
@@ -303,7 +302,8 @@ c. Média
 p3_media <- exp(p3 + s3$sigma^2/2)
 p3_media
 ```
-## Usando o quinto modelo
+
+### Usando o quinto modelo
 
 a. Moda
 
@@ -327,10 +327,10 @@ p4_media <- exp(p4 + s4$sigma^2/2)
 p4_media
 ```
 
-# VISUALIZAÇÃO GRÁFICA
+## VISUALIZAÇÃO GRÁFICA
 
 ```{r}
-df <- data.frame(sd = c(0.1, 0.25, 0.5, 0.75, 1),
+df <- data.frame(sd = c(1.1, 1.25, 1.5, 2, 3),
                  moda = c(p_moda, p1_moda, p2_moda, p3_moda, p4_moda),
                  mediana = c(p_mediana, p1_mediana, p2_mediana, p3_mediana, p4_mediana),
                  media = c(p_media, p1_media, p2_media, p3_media, p4_media))
@@ -339,15 +339,18 @@ df <- melt(df, id = "sd")
 
 ```{r}
 ggplot(df, aes(x = sd, y = value, color = variable)) + 
-  geom_point() + geom_line()
+  geom_point() + 
+  geom_line() + 
+  xlab(TeX("$\\sigma^*$")) +
+  ylab(TeX("$\\hat{Y}$"))
 ```
 
-# VALIDAÇÃO CRUZADA
+## VALIDAÇÃO CRUZADA
 
-## Modelo 1
+### Modelo 1
 
 ```{r}
-id <- sample(1:199, 139)
+id <- sample(1:200, 140)
 y_train <- y[id]
 y_test <-  y[-id]
 x_train <- x[id]
@@ -362,10 +365,10 @@ p_media <- exp(p + s$sigma^2/2)
 (rmse_media <- sqrt(mean((p_media - y_test)^2)))
 ```
 
-## Modelo 2
+### Modelo 2
 
 ```{r}
-id <- sample(1:199, 139)
+id <- sample(1:200, 140)
 y1_train <- y1[id]
 y1_test <-  y1[-id]
 x_train <- x[id]
@@ -380,10 +383,10 @@ p1_media <- exp(p1 + s1$sigma^2/2)
 (rmse1_media <- sqrt(mean((p1_media - y1_test)^2)))
 ```
 
-## Modelo 3
+### Modelo 3
 
 ```{r}
-id <- sample(1:199, 139)
+id <- sample(1:200, 140)
 y2_train <- y2[id]
 y2_test <-  y2[-id]
 x_train <- x[id]
@@ -398,10 +401,10 @@ p2_media <- exp(p2 + s2$sigma^2/2)
 (rmse2_media <- sqrt(mean((p2_media - y2_test)^2)))
 ```
 
-## Modelo 4
+### Modelo 4
 
 ```{r}
-id <- sample(1:199, 139)
+id <- sample(1:200, 140)
 y3_train <- y3[id]
 y3_test <-  y3[-id]
 x_train <- x[id]
@@ -416,10 +419,10 @@ p3_media <- exp(p3 + s3$sigma^2/2)
 (rmse3_media <- sqrt(mean((p3_media - y3_test)^2)))
 ```
 
-## Modelo 5
+### Modelo 5
 
 ```{r}
-id <- sample(1:199, 139)
+id <- sample(1:200, 140)
 y4_train <- y4[id]
 y4_test <-  y4[-id]
 x_train <- x[id]
@@ -434,87 +437,22 @@ p4_media <- exp(p4 + s4$sigma^2/2)
 (rmse4_media <- sqrt(mean((p4_media - y4_test)^2)))
 ```
 
-# VISUALIZAÇÂO VALIDAÇÃO CRUZADA
+### VISUALIZAÇÂO VALIDAÇÃO CRUZADA
 
 ```{r}
-df <- data.frame(sd = c(0.1, 0.25, 0.5, 0.75, 1),
-                 RMSE_moda = c(rmse_moda, rmse1_moda, rmse2_moda, rmse3_moda, 
-                               rmse4_moda),
-                 RMSE_mediana = c(rmse_mediana, rmse1_mediana, rmse2_mediana, 
-                                  rmse3_mediana, rmse4_mediana),
-                 RMSE_media = c(rmse_media, rmse1_media, rmse2_media, 
-                                rmse3_media, rmse4_media))
-df <- melt(df, id = "sd")
+df <- data.frame(sd = c(1.1, 1.25, 1.5),
+                 RMSE_moda = c(rmse_moda, rmse1_moda, rmse2_moda),
+                 RMSE_mediana = c(rmse_mediana, rmse1_mediana, rmse2_mediana),
+                 RMSE_media = c(rmse_media, rmse1_media, rmse2_media))
+df <- melt(df, id = "sd", value.name = "RMSE")
 ```
 
 ```{r}
-ggplot(df, aes(x = sd, y = value, color = variable)) + 
-  geom_point() + geom_line()
-```
-
-# SIMULAÇÕES DE MONTE CARLO
-
-```{r}
-set.seed(1)
-x <- seq(1, 100, 0.5)
-sd <- seq(0.1, 3.5, .1)
-n <- 500
-rmse <- NULL
-for (i in seq_along(sd)) {
-  moda <- NULL
-  mediana <- NULL
-  media <- NULL
-  for (j in 1:n){
-    y <- exp(x/25 + rnorm(199, sd = sd[[i]])) 
-    id <- sample(1:199, 139)
-    y_train <- y[id]
-    y_test <-  y[-id]
-    x_train <- x[id]
-    fit <- lm(log(y_train) ~ x_train)
-    s <- summary(fit)
-    p <- predict(fit, newdata = data.frame(x_train = x[-id]))
-    p_moda <- exp(p - s$sigma^2)
-    p_mediana <- exp(p)
-    p_media <- exp(p + s$sigma^2/2)
-    moda[[j]] <- sqrt(mean((p_moda - y_test)^2))
-    mediana[[j]] <- sqrt(mean((p_mediana - y_test)^2))
-    media[[j]] <- sqrt(mean((p_media - y_test)^2))  
-  }
-  rmse[[i]] <- data.frame(sd = sd[[i]], moda, mediana, media)
-}
-rmse <- do.call(rbind, rmse)
-rmse %<>% 
-  rowwise() %>% 
-  mutate(Min = which.min(c(moda, mediana, media)))
-```
-
-```{r}
-medias <- rmse %>%
-  group_by(sd) %>%
-  summarise(Moda = mean(moda), 
-            Mediana = mean(mediana), 
-            Media = mean(media))
-n <- rmse %>%
-  group_by(sd, Min) %>%
-  summarise(n())
-```
-
-```{r}
-medias <- melt(medias, id = "sd")
-ggplot(medias, aes(x = sd, y = value, color = variable)) + 
-  geom_point() + 
-  geom_line()
-```
-```{r}
-ggplot(n, aes(x = sd, y = `n()`, 
-              color = factor(Min, 
-                             levels = c(1, 2, 3), 
-                             labels = c("moda", "mediana", "media")))) + 
+ggplot(df, aes(x = sd, y = RMSE, color = variable)) + 
   geom_point() + 
   geom_line() + 
-  guides(color=guide_legend(title="Estimativa"))
+  xlab(TeX("$\\sigma^*$"))
 ```
-
 
 # REGRESSÃO À MEDIANA
 
@@ -571,14 +509,119 @@ p4_mediana <- exp(p4)
 ```
 
 ```{r}
-df <- data.frame(sd = c(0.1, 0.25, 0.5, 0.75, 1),
+df <- data.frame(sd = c(1.1, 1.25, 1.5, 2, 3),
                  MAPE = c(mape, mape1, mape2, mape3, mape4))
-df <- melt(df, id = "sd")
+df <- melt(df, id = "sd", value.name = "MAPE")
 ```
 
 ```{r}
-ggplot(df, aes(x = sd, y = value, color = variable)) + 
+ggplot(df, aes(x = sd, y = MAPE, color = variable)) + 
   geom_point() + geom_line()
+```
+
+# SIMULAÇÕES DE MONTE CARLO
+
+```{r}
+set.seed(1)
+x <- runif(200, 0, 100)
+sd <- seq(1.1, 33, .1)
+n <- 500
+rmse <- NULL
+for (i in seq_along(sd)) {
+  moda <- NULL
+  mediana <- NULL
+  media <- NULL
+  for (j in 1:n){
+    y <- exp(x/8 + rnorm(200, sd = log(sd[[i]]))) 
+    id <- sample(1:200, 140)
+    y_train <- y[id]
+    y_test <-  y[-id]
+    x_train <- x[id]
+    fit <- lm(log(y_train) ~ x_train)
+    s <- summary(fit)
+    p <- predict(fit, newdata = data.frame(x_train = x[-id]))
+    p_moda <- exp(p - s$sigma^2)
+    p_mediana <- exp(p)
+    p_media <- exp(p + s$sigma^2/2)
+    moda[[j]] <- sqrt(mean((p_moda - y_test)^2))
+    mediana[[j]] <- sqrt(mean((p_mediana - y_test)^2))
+    media[[j]] <- sqrt(mean((p_media - y_test)^2))  
+  }
+  rmse[[i]] <- data.frame(sd = sd[[i]], moda, mediana, media)
+}
+rmse <- do.call(rbind, rmse)
+```
+
+```{r}
+rmse2 <- melt(rmse, id = "sd", value.name = "RMSE", variable.name = "Estimativa")
+```
+
+```{r}
+p <- ggplot(rmse2[which(rmse2$sd == 1.1), ], aes(x = RMSE, fill = Estimativa)) + 
+  geom_density(alpha=0.25) + 
+  labs(title = NULL, subtitle = TeX("$\\sigma^* = 1,1$"))
+p1 <- ggplot(rmse2[which(rmse2$sd == 1.3), ], aes(x = RMSE, fill = Estimativa)) + 
+  geom_density(alpha=0.25) + 
+  labs(title = NULL, subtitle = TeX("$\\sigma^* = 1,3$"))
+p2 <- ggplot(rmse2[which(rmse2$sd == 1.5), ], aes(x = RMSE, fill = Estimativa)) + 
+  geom_density(alpha=0.25) + 
+  labs(title = NULL, subtitle = TeX("$\\sigma^* = 1,5$"))
+p3 <- ggplot(rmse2[which(rmse2$sd == 2), ], aes(x = RMSE, fill = Estimativa)) + 
+  geom_density(alpha=0.25) + 
+  labs(title = NULL, subtitle = TeX("$\\sigma^* = 2$"))
+p4 <- ggplot(rmse2[which(rmse2$sd == 2.5), ], aes(x = RMSE, fill = Estimativa)) + 
+  geom_density(alpha=0.25) + 
+  labs(title = NULL, subtitle = TeX("$\\sigma^* = 2,5$"))
+p5 <- ggplot(rmse2[which(rmse2$sd == 3), ], aes(x = RMSE, fill = Estimativa)) + 
+  geom_density(alpha=0.25) + 
+  labs(title = NULL, subtitle = TeX("$\\sigma^* = 3$"))
+```
+
+
+```{r}
+cowplot::plot_grid(p, p1, p2, p3, p4, p)
+```
+
+
+
+```{r}
+rmse %<>% 
+  rowwise() %>% 
+  mutate(Min = which.min(c(moda, mediana, media)))
+medianas <- rmse %>%
+  group_by(sd) %>%
+  summarise(Moda = median(moda), 
+            Mediana = median(mediana), 
+            Media = median(media))
+n <- rmse %>%
+  group_by(sd, Min) %>%
+  summarise(n())
+medianas <- melt(medianas, id = "sd", value.name = "median(RMSE)")
+```
+
+```{r}
+p <- ggplot(medianas, aes(x = sd, y = `median(RMSE)`, color = variable)) + 
+  geom_point() + 
+  xlab(TeX("$\\sigma^*$"))
+p
+p + geom_line() + xlim(1.4,3) + ylim(0, 150000)
+```
+
+```{r}
+p <- ggplot(n, aes(x = sd, y = `n()`, 
+              color = factor(Min, 
+                             levels = c(1, 2, 3), 
+                             labels = c("moda", "mediana", "media")))) + 
+  geom_point() + 
+  geom_line() + 
+  xlab(TeX("$\\sigma^*$")) +
+  ylab("N.º de casos com menor RMSE") + 
+  guides(color=guide_legend(title="Estimativa"))
+p
+```
+
+```{r}
+p + xlim(1.4, 3)
 ```
 
 # REFERÊNCIAS

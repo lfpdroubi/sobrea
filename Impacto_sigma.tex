@@ -29,46 +29,6 @@
             pdfborder={0 0 0},
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -138,356 +98,103 @@ que estes valores estejam entre 1,4 e 3 (0,336 \(\leq s \leq\) 1,099).
 
 Na Engenharia de Avaliações, temos:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{data}\NormalTok{(centro_}\DecValTok{2015}\NormalTok{)}
-\NormalTok{dados <-}\StringTok{ }\NormalTok{centro_}\DecValTok{2015}\OperatorTok{@}\NormalTok{data}
-\NormalTok{dados <-}\StringTok{ }\NormalTok{dados[}\KeywordTok{complete.cases}\NormalTok{(dados), ]}
-\NormalTok{x <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(}\KeywordTok{mean}\NormalTok{(}\KeywordTok{log}\NormalTok{(dados}\OperatorTok{$}\NormalTok{valor)))}
-\NormalTok{s <-}\KeywordTok{exp}\NormalTok{(}\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{sum}\NormalTok{(}\KeywordTok{log}\NormalTok{(dados}\OperatorTok{$}\NormalTok{valor}\OperatorTok{/}\NormalTok{x)}\OperatorTok{^}\DecValTok{2}\NormalTok{)}\OperatorTok{/}\KeywordTok{length}\NormalTok{(dados}\OperatorTok{$}\NormalTok{valor)))}
-\NormalTok{f1 <-}\StringTok{ }\KeywordTok{fitdist}\NormalTok{(dados}\OperatorTok{$}\NormalTok{valor, }\StringTok{"lnorm"}\NormalTok{, }\DataTypeTok{method =} \StringTok{"mle"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{itemize}
 \tightlist
 \item
   Hochheim (HOCHHEIM, 2015, p. 21): \(s^* =\) 1,851.
 \end{itemize}
 
-\section{EXEMPLO 1}\label{exemplo-1}
+\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-2-1.pdf}
 
-\subsection{GERAÇÃO DE DADOS
-RANDÔMICOS}\label{geracao-de-dados-randomicos}
+\section{EXEMPLOS DE APLICAÇÃO}\label{exemplos-de-aplicacao}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{x <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{100}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
-\NormalTok{y <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(x}\OperatorTok{/}\DecValTok{25} \OperatorTok{+}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{199}\NormalTok{, }\DataTypeTok{sd =}\NormalTok{ .}\DecValTok{1}\NormalTok{)) }
-\end{Highlighting}
-\end{Shaded}
+\subsection{EXEMPLO 1}\label{exemplo-1}
 
-\subsection{GRÁFICOS}\label{graficos}
+\subsubsection{\texorpdfstring{GERAÇÃO DE DADOS LOGNORMAIS COM
+\(s^* = 1.1\)}{GERAÇÃO DE DADOS LOGNORMAIS COM s\^{}* = 1.1}}\label{geracao-de-dados-lognormais-com-s-1.1}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{log}\NormalTok{(y) }\OperatorTok{~}\StringTok{ }\NormalTok{x)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-3-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{histogram}\NormalTok{(y)}
-\KeywordTok{plotDist}\NormalTok{(}\StringTok{"lnorm"}\NormalTok{, }
-         \DataTypeTok{meanlog =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{log}\NormalTok{(y), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-         \DataTypeTok{sdlog =} \KeywordTok{sd}\NormalTok{(}\KeywordTok{log}\NormalTok{(y), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), }
-         \DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\subsubsection{GRÁFICOS}\label{graficos}
 
 \includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-4-1.pdf}
 
-\subsection{MODELO}\label{modelo}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y) }\OperatorTok{~}\StringTok{ }\NormalTok{x)}
-\NormalTok{s <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit)}
-\NormalTok{s}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = log(y) ~ x)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.23390 -0.06364 -0.00840  0.05575  0.23419 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 0.0139382  0.0133564   1.044    0.298    
-## x           0.0397985  0.0002299 173.114   <2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.09315 on 197 degrees of freedom
-## Multiple R-squared:  0.9935, Adjusted R-squared:  0.9934 
-## F-statistic: 2.997e+04 on 1 and 197 DF,  p-value: < 2.2e-16
-\end{verbatim}
-
-\section{EXEMPLO 2}\label{exemplo-2}
+\subsection{EXEMPLO 2}\label{exemplo-2}
 
 Mantido mesmo vetor x criado anteriormente.
 
-\subsection{GERAÇÃO DE DADOS
-RANDÔMICOS}\label{geracao-de-dados-randomicos-1}
+\subsubsection{\texorpdfstring{GERAÇÃO DE DADOS LOGNORMAIS COM
+\(s^* = 1,25\)}{GERAÇÃO DE DADOS LOGNORMAIS COM s\^{}* = 1,25}}\label{geracao-de-dados-lognormais-com-s-125}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y1 <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(x}\OperatorTok{/}\DecValTok{25} \OperatorTok{+}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{199}\NormalTok{, }\DataTypeTok{sd =}\NormalTok{ .}\DecValTok{25}\NormalTok{)) }
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{GRÁFICOS}\label{graficos-1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{log}\NormalTok{(y1) }\OperatorTok{~}\StringTok{ }\NormalTok{x)}
-\end{Highlighting}
-\end{Shaded}
+\subsubsection{GRÁFICOS}\label{graficos-1}
 
 \includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-7-1.pdf}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{histogram}\NormalTok{(y1)}
-\KeywordTok{plotDist}\NormalTok{(}\StringTok{"lnorm"}\NormalTok{, }
-         \DataTypeTok{meanlog =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{log}\NormalTok{(y1), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-         \DataTypeTok{sdlog =} \KeywordTok{sd}\NormalTok{(}\KeywordTok{log}\NormalTok{(y1), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), }
-         \DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-8-1.pdf}
-
-\subsection{MODELO}\label{modelo-1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y1) }\OperatorTok{~}\StringTok{ }\NormalTok{x)}
-\NormalTok{s1 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit1)}
-\NormalTok{s1}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = log(y1) ~ x)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -0.73214 -0.12672 -0.00943  0.17041  0.65261 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 0.0100938  0.0363167   0.278    0.781    
-## x           0.0399891  0.0006251  63.972   <2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.2533 on 197 degrees of freedom
-## Multiple R-squared:  0.9541, Adjusted R-squared:  0.9538 
-## F-statistic:  4092 on 1 and 197 DF,  p-value: < 2.2e-16
-\end{verbatim}
-
-\section{EXEMPLO 3}\label{exemplo-3}
+\subsection{EXEMPLO 3}\label{exemplo-3}
 
 Mantido mesmo vetor x criado anteriormente.
 
-\subsection{GERAÇÃO DE DADOS
-RANDÔMICOS}\label{geracao-de-dados-randomicos-2}
+\subsubsection{\texorpdfstring{GERAÇÃO DE DADOS LOGNORMAIS COM
+\(s^* = 1,5\)}{GERAÇÃO DE DADOS LOGNORMAIS COM s\^{}* = 1,5}}\label{geracao-de-dados-lognormais-com-s-15}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y2 <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(x}\OperatorTok{/}\DecValTok{25} \OperatorTok{+}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{199}\NormalTok{, }\DataTypeTok{sd =}\NormalTok{ .}\DecValTok{5}\NormalTok{)) }
-\end{Highlighting}
-\end{Shaded}
+\subsubsection{GRÁFICOS}\label{graficos-2}
 
-\subsection{GRÁFICOS}\label{graficos-2}
+\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-10-1.pdf}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{log}\NormalTok{(y2) }\OperatorTok{~}\StringTok{ }\NormalTok{x)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-11-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{histogram}\NormalTok{(y2)}
-\KeywordTok{plotDist}\NormalTok{(}\StringTok{"lnorm"}\NormalTok{, }
-         \DataTypeTok{meanlog =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{log}\NormalTok{(y2), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-         \DataTypeTok{sdlog =} \KeywordTok{sd}\NormalTok{(}\KeywordTok{log}\NormalTok{(y2), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), }
-         \DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-12-1.pdf}
-
-\subsection{MODELO}\label{modelo-2}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit2 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y2) }\OperatorTok{~}\StringTok{ }\NormalTok{x)}
-\NormalTok{s2 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit2)}
-\NormalTok{s2}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = log(y2) ~ x)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.4740 -0.3438 -0.0224  0.3471  1.9256 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -0.039644   0.077034  -0.515    0.607    
-## x            0.040391   0.001326  30.462   <2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.5373 on 197 degrees of freedom
-## Multiple R-squared:  0.8249, Adjusted R-squared:  0.824 
-## F-statistic: 927.9 on 1 and 197 DF,  p-value: < 2.2e-16
-\end{verbatim}
-
-\section{EXEMPLO 4}\label{exemplo-4}
+\subsection{EXEMPLO 4}\label{exemplo-4}
 
 Mantido mesmo vetor x criado anteriormente.
 
-\subsection{GERAÇÃO DE DADOS
-RANDÔMICOS}\label{geracao-de-dados-randomicos-3}
+\subsubsection{\texorpdfstring{GERAÇÃO DE DADOS LOGNORMAIS COM
+\(s^* = 2\)}{GERAÇÃO DE DADOS LOGNORMAIS COM s\^{}* = 2}}\label{geracao-de-dados-lognormais-com-s-2}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y3 <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(x}\OperatorTok{/}\DecValTok{25} \OperatorTok{+}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{199}\NormalTok{, }\DataTypeTok{sd =}\NormalTok{ .}\DecValTok{75}\NormalTok{)) }
-\end{Highlighting}
-\end{Shaded}
+\subsubsection{GRÁFICOS}\label{graficos-3}
 
-\subsection{GRÁFICOS}\label{graficos-3}
+\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-13-1.pdf}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{log}\NormalTok{(y3) }\OperatorTok{~}\StringTok{ }\NormalTok{x)}
-\end{Highlighting}
-\end{Shaded}
+\subsection{EXEMPLO 5}\label{exemplo-5}
 
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-15-1.pdf}
+Mantido mesmo vetor x criado anteriormente.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{histogram}\NormalTok{(y3)}
-\KeywordTok{plotDist}\NormalTok{(}\StringTok{"lnorm"}\NormalTok{, }
-         \DataTypeTok{meanlog =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{log}\NormalTok{(y3), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-         \DataTypeTok{sdlog =} \KeywordTok{sd}\NormalTok{(}\KeywordTok{log}\NormalTok{(y3), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), }
-         \DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\subsubsection{\texorpdfstring{GERAÇÃO DE DADOS LOGNORMAIS COM
+\(s^* = 3\)}{GERAÇÃO DE DADOS LOGNORMAIS COM s\^{}* = 3}}\label{geracao-de-dados-lognormais-com-s-3}
+
+\subsubsection{GRÁFICOS}\label{graficos-4}
 
 \includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-16-1.pdf}
 
-\subsection{MODELO}\label{modelo-3}
+\subsection{MODELOS}\label{modelos}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit3 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y3) }\OperatorTok{~}\StringTok{ }\NormalTok{x)}
-\NormalTok{s3 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit3)}
-\NormalTok{s3}
-\end{Highlighting}
-\end{Shaded}
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{5}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-6} 
+\\[-1.8ex] & log(y) & log(y1) & log(y2) & log(y3) & log(y4) \\ 
+\\[-1.8ex] & (1) & (2) & (3) & (4) & (5)\\ 
+\hline \\[-1.8ex] 
+ x & 0.125$^{***}$ & 0.125$^{***}$ & 0.126$^{***}$ & 0.123$^{***}$ & 0.124$^{***}$ \\ 
+  & (0.001) & (0.002) & (0.002) & (0.002) & (0.004) \\ 
+  & & & & & \\ 
+ Constant & $-$0.041 & $-$0.026 & 0.019 & 0.050 & $-$0.015 \\ 
+  & (0.084) & (0.098) & (0.116) & (0.148) & (0.217) \\ 
+  & & & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 1,000 & 1,000 & 1,000 & 1,000 & 1,000 \\ 
+R$^{2}$ & 0.891 & 0.859 & 0.814 & 0.720 & 0.548 \\ 
+Adjusted R$^{2}$ & 0.891 & 0.859 & 0.813 & 0.720 & 0.548 \\ 
+Residual Std. Error (df = 998) & 1.137 & 1.318 & 1.568 & 1.991 & 2.922 \\ 
+F Statistic (df = 1; 998) & 8,162.732$^{***}$ & 6,078.971$^{***}$ & 4,357.517$^{***}$ & 2,565.384$^{***}$ & 1,212.096$^{***}$ \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{5}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table}
 
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = log(y3) ~ x)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -2.09563 -0.64150 -0.03851  0.59729  2.15902 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -0.172145   0.115687  -1.488    0.138    
-## x            0.042098   0.001991  21.141   <2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.8068 on 197 degrees of freedom
-## Multiple R-squared:  0.6941, Adjusted R-squared:  0.6925 
-## F-statistic:   447 on 1 and 197 DF,  p-value: < 2.2e-16
-\end{verbatim}
+\subsection{ESTIMATIVAS}\label{estimativas}
 
-\section{EXEMPLO 5}\label{exemplo-5}
-
-Mantido mesmo vetor x criado anteriormente.
-
-\subsection{GERAÇÃO DE DADOS
-RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{y4 <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(x}\OperatorTok{/}\DecValTok{25} \OperatorTok{+}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{199}\NormalTok{, }\DataTypeTok{sd =} \DecValTok{1}\NormalTok{)) }
-\end{Highlighting}
-\end{Shaded}
-
-\subsection{GRÁFICOS}\label{graficos-4}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{plot}\NormalTok{(}\KeywordTok{log}\NormalTok{(y4) }\OperatorTok{~}\StringTok{ }\NormalTok{x)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-19-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{histogram}\NormalTok{(y4)}
-\KeywordTok{plotDist}\NormalTok{(}\StringTok{"lnorm"}\NormalTok{, }
-         \DataTypeTok{meanlog =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{log}\NormalTok{(y4), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-         \DataTypeTok{sdlog =} \KeywordTok{sd}\NormalTok{(}\KeywordTok{log}\NormalTok{(y4), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{), }
-         \DataTypeTok{add =} \OtherTok{TRUE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-20-1.pdf}
-
-\subsection{MODELO}\label{modelo-4}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit4 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y4) }\OperatorTok{~}\StringTok{ }\NormalTok{x)}
-\NormalTok{s4 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit4)}
-\NormalTok{s4}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## 
-## Call:
-## lm(formula = log(y4) ~ x)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -3.07159 -0.71233  0.07082  0.67517  3.08445 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -0.066296   0.155891  -0.425    0.671    
-## x            0.041566   0.002683  15.491   <2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 1.087 on 197 degrees of freedom
-## Multiple R-squared:  0.5492, Adjusted R-squared:  0.5469 
-## F-statistic:   240 on 1 and 197 DF,  p-value: < 2.2e-16
-\end{verbatim}
-
-\section{ESTIMATIVAS}\label{estimativas}
-
-\subsection{Usando o primeiro modelo}\label{usando-o-primeiro-modelo}
+\subsubsection{Usando o primeiro modelo}\label{usando-o-primeiro-modelo}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi}.}
@@ -496,17 +203,9 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Moda
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \DecValTok{50}\NormalTok{))}
-\NormalTok{p_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p }\OperatorTok{-}\StringTok{ }\NormalTok{s}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{p_moda}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##        1 
-## 7.353577
+## 138.1358
 \end{verbatim}
 
 \begin{enumerate}
@@ -517,16 +216,9 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Mediana
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p)}
-\NormalTok{p_mediana}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##        1 
-## 7.417663
+## 503.6085
 \end{verbatim}
 
 \begin{enumerate}
@@ -537,19 +229,12 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Média
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p }\OperatorTok{+}\StringTok{ }\NormalTok{s}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{p_media}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##        1 
-## 7.449915
+## 961.5823
 \end{verbatim}
 
-\subsection{Usando o segundo modelo}\label{usando-o-segundo-modelo}
+\subsubsection{Usando o segundo modelo}\label{usando-o-segundo-modelo}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi}.}
@@ -558,17 +243,9 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Moda
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p1 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit1, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \DecValTok{50}\NormalTok{))}
-\NormalTok{p1_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p1 }\OperatorTok{-}\StringTok{ }\NormalTok{s1}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{p1_moda}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##        1 
-## 6.996403
+## 90.00315
 \end{verbatim}
 
 \begin{enumerate}
@@ -579,16 +256,9 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Mediana
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p1_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p1)}
-\NormalTok{p1_mediana}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##        1 
-## 7.459949
+## 510.8466
 \end{verbatim}
 
 \begin{enumerate}
@@ -599,19 +269,12 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Média
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p1_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p1 }\OperatorTok{+}\StringTok{ }\NormalTok{s1}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{p1_media}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##        1 
-## 7.703116
+## 1217.046
 \end{verbatim}
 
-\subsection{Usando o terceiro modelo}\label{usando-o-terceiro-modelo}
+\subsubsection{Usando o terceiro modelo}\label{usando-o-terceiro-modelo}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi}.}
@@ -620,17 +283,9 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Moda
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit2, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \DecValTok{50}\NormalTok{))}
-\NormalTok{p2_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p2 }\OperatorTok{-}\StringTok{ }\NormalTok{s2}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{p2_moda}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##        1 
-## 5.426298
+## 47.88896
 \end{verbatim}
 
 \begin{enumerate}
@@ -640,79 +295,10 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
 \item
   Mediana
 \end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p2_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p2)}
-\NormalTok{p2_mediana}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##        1 
-## 7.242041
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\setcounter{enumi}{2}
-\tightlist
-\item
-  Média
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p2_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p2 }\OperatorTok{+}\StringTok{ }\NormalTok{s2}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{p2_media}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 ##       1 
-## 8.36642
-\end{verbatim}
-
-\subsection{Usando o quarto modelo}\label{usando-o-quarto-modelo}
-
-\begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\tightlist
-\item
-  Moda
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p3 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit3, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \DecValTok{50}\NormalTok{))}
-\NormalTok{p3_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p3 }\OperatorTok{-}\StringTok{ }\NormalTok{s3}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{p3_moda}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##        1 
-## 3.603033
-\end{verbatim}
-
-\begin{enumerate}
-\def\labelenumi{\alph{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  Mediana
-\end{enumerate}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p3_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p3)}
-\NormalTok{p3_mediana}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##        1 
-## 6.908516
+## 559.858
 \end{verbatim}
 
 \begin{enumerate}
@@ -723,19 +309,12 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Média
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p3_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p3 }\OperatorTok{+}\StringTok{ }\NormalTok{s3}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{p3_media}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##        1 
-## 9.566278
+## 1914.252
 \end{verbatim}
 
-\subsection{Usando o quinto modelo}\label{usando-o-quinto-modelo}
+\subsubsection{Usando o quarto modelo}\label{usando-o-quarto-modelo}
 
 \begin{enumerate}
 \def\labelenumi{\alph{enumi}.}
@@ -744,17 +323,9 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Moda
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p4 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit4, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x =} \DecValTok{50}\NormalTok{))}
-\NormalTok{p4_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p4 }\OperatorTok{-}\StringTok{ }\NormalTok{s4}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{p4_moda}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
 ##        1 
-## 2.293168
+## 9.313405
 \end{verbatim}
 
 \begin{enumerate}
@@ -765,16 +336,9 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Mediana
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p4_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p4)}
-\NormalTok{p4_mediana}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-##       1 
-## 7.47829
+##        1 
+## 491.4793
 \end{verbatim}
 
 \begin{enumerate}
@@ -785,465 +349,172 @@ RANDÔMICOS}\label{geracao-de-dados-randomicos-4}
   Média
 \end{enumerate}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{p4_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p4 }\OperatorTok{+}\StringTok{ }\NormalTok{s4}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{p4_media}
-\end{Highlighting}
-\end{Shaded}
+\begin{verbatim}
+##        1 
+## 3570.291
+\end{verbatim}
+
+\subsubsection{Usando o quinto modelo}\label{usando-o-quinto-modelo}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\tightlist
+\item
+  Moda
+\end{enumerate}
+
+\begin{verbatim}
+##          1 
+## 0.09514152
+\end{verbatim}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{1}
+\tightlist
+\item
+  Mediana
+\end{enumerate}
 
 \begin{verbatim}
 ##        1 
-## 13.50472
+## 485.3153
 \end{verbatim}
 
-\section{VISUALIZAÇÃO GRÁFICA}\label{visualizacao-grafica}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{sd =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\DecValTok{1}\NormalTok{),}
-                 \DataTypeTok{moda =} \KeywordTok{c}\NormalTok{(p_moda, p1_moda, p2_moda, p3_moda, p4_moda),}
-                 \DataTypeTok{mediana =} \KeywordTok{c}\NormalTok{(p_mediana, p1_mediana, p2_mediana, p3_mediana, p4_mediana),}
-                 \DataTypeTok{media =} \KeywordTok{c}\NormalTok{(p_media, p1_media, p2_media, p3_media, p4_media))}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(df, }\DataTypeTok{id =} \StringTok{"sd"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sd, }\DataTypeTok{y =}\NormalTok{ value, }\DataTypeTok{color =}\NormalTok{ variable)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-38-1.pdf}
-
-\section{VALIDAÇÃO CRUZADA}\label{validacao-cruzada}
-
-\subsection{Modelo 1}\label{modelo-1-1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{id <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{199}\NormalTok{, }\DecValTok{139}\NormalTok{)}
-\NormalTok{y_train <-}\StringTok{ }\NormalTok{y[id]}
-\NormalTok{y_test <-}\StringTok{  }\NormalTok{y[}\OperatorTok{-}\NormalTok{id]}
-\NormalTok{x_train <-}\StringTok{ }\NormalTok{x[id]}
-\NormalTok{fit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{s <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit)}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{p_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p }\OperatorTok{-}\StringTok{ }\NormalTok{s}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{p_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p)}
-\NormalTok{p_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p }\OperatorTok{+}\StringTok{ }\NormalTok{s}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{(rmse_moda <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p_moda }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
+\begin{enumerate}
+\def\labelenumi{\alph{enumi}.}
+\setcounter{enumi}{2}
+\tightlist
+\item
+  Média
+\end{enumerate}
 
 \begin{verbatim}
-## [1] 1.957474
+##        1 
+## 34661.79
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(rmse_mediana <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
+\subsection{VISUALIZAÇÃO GRÁFICA}\label{visualizacao-grafica}
+
+\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+\subsection{VALIDAÇÃO CRUZADA}\label{validacao-cruzada}
+
+\subsubsection{Modelo 1}\label{modelo-1}
 
 \begin{verbatim}
-## [1] 1.891117
+## [1] 155510.7
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(rmse_media <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p_media }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
-## [1] 1.863776
+## [1] 138927.5
 \end{verbatim}
-
-\subsection{Modelo 2}\label{modelo-2-1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{id <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{199}\NormalTok{, }\DecValTok{139}\NormalTok{)}
-\NormalTok{y1_train <-}\StringTok{ }\NormalTok{y1[id]}
-\NormalTok{y1_test <-}\StringTok{  }\NormalTok{y1[}\OperatorTok{-}\NormalTok{id]}
-\NormalTok{x_train <-}\StringTok{ }\NormalTok{x[id]}
-\NormalTok{fit1 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y1_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{s1 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit1)}
-\NormalTok{p1 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit1, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{p1_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p1 }\OperatorTok{-}\StringTok{ }\NormalTok{s1}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{p1_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p1)}
-\NormalTok{p1_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p1 }\OperatorTok{+}\StringTok{ }\NormalTok{s1}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{(rmse1_moda <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p1_moda }\OperatorTok{-}\StringTok{ }\NormalTok{y1_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
-## [1] 5.480126
+## [1] 133838.6
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(rmse1_mediana <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p1_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y1_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
+\subsubsection{Modelo 2}\label{modelo-2}
 
 \begin{verbatim}
-## [1] 5.111089
+## [1] 196681
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(rmse1_media <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p1_media }\OperatorTok{-}\StringTok{ }\NormalTok{y1_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
-## [1] 5.080717
+## [1] 171146.3
 \end{verbatim}
-
-\subsection{Modelo 3}\label{modelo-3-1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{id <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{199}\NormalTok{, }\DecValTok{139}\NormalTok{)}
-\NormalTok{y2_train <-}\StringTok{ }\NormalTok{y2[id]}
-\NormalTok{y2_test <-}\StringTok{  }\NormalTok{y2[}\OperatorTok{-}\NormalTok{id]}
-\NormalTok{x_train <-}\StringTok{ }\NormalTok{x[id]}
-\NormalTok{fit2 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y2_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{s2 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit2)}
-\NormalTok{p2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit2, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{p2_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p2 }\OperatorTok{-}\StringTok{ }\NormalTok{s2}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{p2_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p2)}
-\NormalTok{p2_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p2 }\OperatorTok{+}\StringTok{ }\NormalTok{s2}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{(rmse2_moda <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p2_moda }\OperatorTok{-}\StringTok{ }\NormalTok{y2_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
-## [1] 18.19711
+## [1] 160454.8
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(rmse2_mediana <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p2_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y2_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
+\subsubsection{Modelo 3}\label{modelo-3}
 
 \begin{verbatim}
-## [1] 15.21072
+## [1] 290597
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(rmse2_media <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p2_media }\OperatorTok{-}\StringTok{ }\NormalTok{y2_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
-## [1] 13.83019
+## [1] 272264.3
 \end{verbatim}
-
-\subsection{Modelo 4}\label{modelo-4-1}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{id <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{199}\NormalTok{, }\DecValTok{139}\NormalTok{)}
-\NormalTok{y3_train <-}\StringTok{ }\NormalTok{y3[id]}
-\NormalTok{y3_test <-}\StringTok{  }\NormalTok{y3[}\OperatorTok{-}\NormalTok{id]}
-\NormalTok{x_train <-}\StringTok{ }\NormalTok{x[id]}
-\NormalTok{fit3 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y3_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{s3 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit3)}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit3, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{p3_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p3 }\OperatorTok{-}\StringTok{ }\NormalTok{s3}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{p3_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p3)}
-\NormalTok{p3_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p3 }\OperatorTok{+}\StringTok{ }\NormalTok{s3}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{(rmse3_moda <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p3_moda }\OperatorTok{-}\StringTok{ }\NormalTok{y3_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
-## [1] 25.8767
+## [1] 273938.6
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(rmse3_mediana <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p3_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y3_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
+\subsubsection{Modelo 4}\label{modelo-4}
 
 \begin{verbatim}
-## [1] 24.55966
+## [1] 1865827
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(rmse3_media <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p3_media }\OperatorTok{-}\StringTok{ }\NormalTok{y3_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
-## [1] 23.77651
+## [1] 1865774
 \end{verbatim}
-
-\subsection{Modelo 5}\label{modelo-5}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{id <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{199}\NormalTok{, }\DecValTok{139}\NormalTok{)}
-\NormalTok{y4_train <-}\StringTok{ }\NormalTok{y4[id]}
-\NormalTok{y4_test <-}\StringTok{  }\NormalTok{y4[}\OperatorTok{-}\NormalTok{id]}
-\NormalTok{x_train <-}\StringTok{ }\NormalTok{x[id]}
-\NormalTok{fit4 <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y4_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{s4 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit4)}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit4, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{p4_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p4 }\OperatorTok{-}\StringTok{ }\NormalTok{s4}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{p4_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p4)}
-\NormalTok{p4_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p4 }\OperatorTok{+}\StringTok{ }\NormalTok{s4}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{(rmse4_moda <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p4_moda }\OperatorTok{-}\StringTok{ }\NormalTok{y4_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
-## [1] 64.86965
+## [1] 1865451
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(rmse4_mediana <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p4_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y4_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
+\subsubsection{Modelo 5}\label{modelo-5}
 
 \begin{verbatim}
-## [1] 63.03455
+## [1] 9779082
 \end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{(rmse4_media <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p4_media }\OperatorTok{-}\StringTok{ }\NormalTok{y4_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{)))}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
-## [1] 61.47886
+## [1] 9779023
 \end{verbatim}
 
-\section{VISUALIZAÇÂO VALIDAÇÃO
+\begin{verbatim}
+## [1] 9775666
+\end{verbatim}
+
+\subsubsection{VISUALIZAÇÂO VALIDAÇÃO
 CRUZADA}\label{visualizacao-validacao-cruzada}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{sd =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\DecValTok{1}\NormalTok{),}
-                 \DataTypeTok{RMSE_moda =} \KeywordTok{c}\NormalTok{(rmse_moda, rmse1_moda, rmse2_moda, rmse3_moda, }
-\NormalTok{                               rmse4_moda),}
-                 \DataTypeTok{RMSE_mediana =} \KeywordTok{c}\NormalTok{(rmse_mediana, rmse1_mediana, rmse2_mediana, }
-\NormalTok{                                  rmse3_mediana, rmse4_mediana),}
-                 \DataTypeTok{RMSE_media =} \KeywordTok{c}\NormalTok{(rmse_media, rmse1_media, rmse2_media, }
-\NormalTok{                                rmse3_media, rmse4_media))}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(df, }\DataTypeTok{id =} \StringTok{"sd"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sd, }\DataTypeTok{y =}\NormalTok{ value, }\DataTypeTok{color =}\NormalTok{ variable)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-45-1.pdf}
-
-\section{SIMULAÇÕES DE MONTE CARLO}\label{simulacoes-de-monte-carlo}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
-\NormalTok{x <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{100}\NormalTok{, }\FloatTok{0.5}\NormalTok{)}
-\NormalTok{sd <-}\StringTok{ }\KeywordTok{seq}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{1.5}\NormalTok{, .}\DecValTok{1}\NormalTok{)}
-\NormalTok{n <-}\StringTok{ }\DecValTok{500}
-\NormalTok{rmse <-}\StringTok{ }\OtherTok{NULL}
-\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \KeywordTok{seq_along}\NormalTok{(sd)) \{}
-\NormalTok{  moda <-}\StringTok{ }\OtherTok{NULL}
-\NormalTok{  mediana <-}\StringTok{ }\OtherTok{NULL}
-\NormalTok{  media <-}\StringTok{ }\OtherTok{NULL}
-  \ControlFlowTok{for}\NormalTok{ (j }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\NormalTok{n)\{}
-\NormalTok{    y <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(x}\OperatorTok{/}\DecValTok{25} \OperatorTok{+}\StringTok{ }\KeywordTok{rnorm}\NormalTok{(}\DecValTok{199}\NormalTok{, }\DataTypeTok{sd =}\NormalTok{ sd[[i]])) }
-\NormalTok{    id <-}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\DecValTok{1}\OperatorTok{:}\DecValTok{199}\NormalTok{, }\DecValTok{139}\NormalTok{)}
-\NormalTok{    y_train <-}\StringTok{ }\NormalTok{y[id]}
-\NormalTok{    y_test <-}\StringTok{  }\NormalTok{y[}\OperatorTok{-}\NormalTok{id]}
-\NormalTok{    x_train <-}\StringTok{ }\NormalTok{x[id]}
-\NormalTok{    fit <-}\StringTok{ }\KeywordTok{lm}\NormalTok{(}\KeywordTok{log}\NormalTok{(y_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{    s <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit)}
-\NormalTok{    p <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{    p_moda <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p }\OperatorTok{-}\StringTok{ }\NormalTok{s}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\NormalTok{)}
-\NormalTok{    p_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p)}
-\NormalTok{    p_media <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p }\OperatorTok{+}\StringTok{ }\NormalTok{s}\OperatorTok{$}\NormalTok{sigma}\OperatorTok{^}\DecValTok{2}\OperatorTok{/}\DecValTok{2}\NormalTok{)}
-\NormalTok{    moda[[j]] <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p_moda }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
-\NormalTok{    mediana[[j]] <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{))}
-\NormalTok{    media[[j]] <-}\StringTok{ }\KeywordTok{sqrt}\NormalTok{(}\KeywordTok{mean}\NormalTok{((p_media }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)}\OperatorTok{^}\DecValTok{2}\NormalTok{))  }
-\NormalTok{  \}}
-\NormalTok{  rmse[[i]] <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{sd =}\NormalTok{ sd[[i]], moda, mediana, media)}
-\NormalTok{\}}
-\NormalTok{rmse <-}\StringTok{ }\KeywordTok{do.call}\NormalTok{(rbind, rmse)}
-\NormalTok{rmse }\OperatorTok{%<>%}\StringTok{ }
-\StringTok{  }\KeywordTok{rowwise}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{Min =} \KeywordTok{which.min}\NormalTok{(}\KeywordTok{c}\NormalTok{(moda, mediana, media)))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{medias <-}\StringTok{ }\NormalTok{rmse }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sd) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{Moda =} \KeywordTok{mean}\NormalTok{(moda), }
-            \DataTypeTok{Mediana =} \KeywordTok{mean}\NormalTok{(mediana), }
-            \DataTypeTok{Media =} \KeywordTok{mean}\NormalTok{(media))}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: Grouping rowwise data frame strips rowwise nature
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{n <-}\StringTok{ }\NormalTok{rmse }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(sd, Min) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\KeywordTok{n}\NormalTok{())}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## Warning: Grouping rowwise data frame strips rowwise nature
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{medias <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(medias, }\DataTypeTok{id =} \StringTok{"sd"}\NormalTok{)}
-\KeywordTok{ggplot}\NormalTok{(medias, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sd, }\DataTypeTok{y =}\NormalTok{ value, }\DataTypeTok{color =}\NormalTok{ variable)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_line}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-48-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(n, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sd, }\DataTypeTok{y =} \StringTok{`}\DataTypeTok{n()}\StringTok{`}\NormalTok{, }
-              \DataTypeTok{color =} \KeywordTok{factor}\NormalTok{(Min, }
-                             \DataTypeTok{levels =} \KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{), }
-                             \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"moda"}\NormalTok{, }\StringTok{"mediana"}\NormalTok{, }\StringTok{"media"}\NormalTok{)))) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{guides}\NormalTok{(}\DataTypeTok{color=}\KeywordTok{guide_legend}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Estimativa"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-49-1.pdf}
+\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-43-1.pdf}
 
 \section{REGRESSÃO À MEDIANA}\label{regressao-a-mediana}
 
 \section{VALIDAÇÃO CRUZADA}\label{validacao-cruzada-1}
 
-\subsection{Modelo 1}\label{modelo-1-2}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit <-}\StringTok{ }\KeywordTok{rq}\NormalTok{(}\KeywordTok{log}\NormalTok{(y_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{s <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit)}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{p_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p)}
-\NormalTok{(mape <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(}\KeywordTok{abs}\NormalTok{(p_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y_test)))}
-\end{Highlighting}
-\end{Shaded}
+\subsection{Modelo 1}\label{modelo-1-1}
 
 \begin{verbatim}
-## [1] 14.51783
+## [1] 43663.7
 \end{verbatim}
 
-\subsection{Modelo 2}\label{modelo-2-2}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit1 <-}\StringTok{ }\KeywordTok{rq}\NormalTok{(}\KeywordTok{log}\NormalTok{(y1_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{s1 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit1)}
-\NormalTok{p1 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit1, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{p1_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p1)}
-\NormalTok{(mape1 <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(}\KeywordTok{abs}\NormalTok{(p1_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y1_test)))}
-\end{Highlighting}
-\end{Shaded}
+\subsection{Modelo 2}\label{modelo-2-1}
 
 \begin{verbatim}
-## [1] 12.81536
+## [1] 55736.13
 \end{verbatim}
 
-\subsection{Modelo 3}\label{modelo-3-2}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit2 <-}\StringTok{ }\KeywordTok{rq}\NormalTok{(}\KeywordTok{log}\NormalTok{(y2_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{s2 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit2)}
-\NormalTok{p2 <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit2, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{p2_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p2)}
-\NormalTok{(mape2 <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(}\KeywordTok{abs}\NormalTok{(p2_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y2_test)))}
-\end{Highlighting}
-\end{Shaded}
+\subsection{Modelo 3}\label{modelo-3-1}
 
 \begin{verbatim}
-## [1] 14.11574
+## [1] 61513.52
 \end{verbatim}
 
-\subsection{Modelo 4}\label{modelo-4-2}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit3 <-}\StringTok{ }\KeywordTok{rq}\NormalTok{(}\KeywordTok{log}\NormalTok{(y3_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{s3 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit3)}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit3, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{p3_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p3)}
-\NormalTok{(mape3 <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(}\KeywordTok{abs}\NormalTok{(p3_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y3_test)))}
-\end{Highlighting}
-\end{Shaded}
+\subsection{Modelo 4}\label{modelo-4-1}
 
 \begin{verbatim}
-## [1] 13.29267
+## [1] 208947.1
 \end{verbatim}
 
 \subsection{Modelo 5}\label{modelo-5-1}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{fit4 <-}\StringTok{ }\KeywordTok{rq}\NormalTok{(}\KeywordTok{log}\NormalTok{(y4_train) }\OperatorTok{~}\StringTok{ }\NormalTok{x_train)}
-\NormalTok{s4 <-}\StringTok{ }\KeywordTok{summary}\NormalTok{(fit4)}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{predict}\NormalTok{(fit4, }\DataTypeTok{newdata =} \KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{x_train =}\NormalTok{ x[}\OperatorTok{-}\NormalTok{id]))}
-\NormalTok{p4_mediana <-}\StringTok{ }\KeywordTok{exp}\NormalTok{(p4)}
-\NormalTok{(mape4 <-}\StringTok{ }\KeywordTok{mean}\NormalTok{(}\KeywordTok{abs}\NormalTok{(p4_mediana }\OperatorTok{-}\StringTok{ }\NormalTok{y4_test)))}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{verbatim}
-## [1] 28.11301
+## [1] 1178752
 \end{verbatim}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{sd =} \KeywordTok{c}\NormalTok{(}\FloatTok{0.1}\NormalTok{, }\FloatTok{0.25}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.75}\NormalTok{, }\DecValTok{1}\NormalTok{),}
-                 \DataTypeTok{MAPE =} \KeywordTok{c}\NormalTok{(mape, mape1, mape2, mape3, mape4))}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{melt}\NormalTok{(df, }\DataTypeTok{id =} \StringTok{"sd"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-50-1.pdf}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ sd, }\DataTypeTok{y =}\NormalTok{ value, }\DataTypeTok{color =}\NormalTok{ variable)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_point}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
+\section{SIMULAÇÕES DE MONTE CARLO}\label{simulacoes-de-monte-carlo}
 
-\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-56-1.pdf}
+\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-53-1.pdf}
+\includegraphics{Impacto_sigma_files/figure-latex/unnamed-chunk-54-1.pdf}
 
 \section*{REFERÊNCIAS}\label{referencias}
 \addcontentsline{toc}{section}{REFERÊNCIAS}
