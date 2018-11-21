@@ -3,9 +3,9 @@ title: "Avaliação através da moda, média ou mediana"
 subtitle: "Uma nova abordagem"
 author: 
  - "Luiz Fernando Palin Droubi"
- - "Willian Zonato"
  - "Norberto Hochheim"
-date: "`r Sys.Date()`"
+ - "Willian Zonato"
+date: "`r format(Sys.Date(), '%d/%m/%Y')`"
 output:
   xaringan::moon_reader:
     yolo: false
@@ -13,6 +13,7 @@ output:
     self_contained: TRUE
     chakra: libs/remark-latest.min.js
     nature:
+      countdown: 30000
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
@@ -29,56 +30,116 @@ library(leaflet)
 library(sp)
 library(ggplot2)
 library(emo)
+library(reshape2)
 theme_set(theme_bw())
 ```
 
 background-image: url(https://raw.githubusercontent.com/lfpdroubi/dist_lognormal/master/images/densidade_medidas-1.png)
 
 ---
+class: inverse, center, middle
 
-# Slide #1  
+# Distribuição Lognormal
 
-`r emo::ji("smile")`
+## Definição e propriedades
 
 ---
 
-# Distribuição lognormal
+# Distribuição Lognormal
 
-```{r lognormal, echo = FALSE, fig.show='animate', fig.width=5, fig.height=4, interval=.1}
-x <- seq(0, 3, 0.05)
-mediana <- 1
-sigma <- seq(1.4, 0.1, -0.1)
-for (s in sigma) {
-  y <- dlnorm(x = x, meanlog = log(1), sdlog = s)
-  data <- data.frame(x, y)
-  media <- mediana*exp(s^2/2)
-  moda <- mediana/exp(s^2)
-  p <- ggplot(data, aes(x = x, y = y)) + geom_line() + 
-    geom_segment(aes(x = media, y = 0, xend = media, 
-                   yend = dlnorm(media, meanlog = log(mediana), sdlog = s),
-                   colour = "Média")) +
-    geom_segment(aes(x = mediana, y = 0, xend = mediana,
-                   yend = dlnorm(mediana, meanlog = log(mediana), sdlog = s),
-                   colour = "Mediana")) +
-    geom_segment(aes(x = moda, y = 0, xend = moda, 
-                   yend = dlnorm(moda, meanlog = log(mediana), sdlog = s),
-                   colour = "Moda"))
-  print(p)
-}
+## Definição
+
+Uma variável aleatória $X$ tem distribuição lognormal se seu logaritmo $Y = log(X)$ tem  distribuição normal.
+
+$$f(x;\mu, \sigma) = \frac{1}{x\sigma\sqrt{2\pi}} \exp \left [ -\frac{(\ln(x) - \mu)^2}{2\sigma^2} \right ] $$
+
+em que:
+
+- $\mu$ é a mediana
+- $\sigma > 0$ é o desvio-padrão
+
+---
+
+# Estimação dos parâmetros da distribuição
+
+$$\bar{x}^* = \exp \left ( \frac{1}{n} \sum_{i=1}^{n} \ln(x_i) \right ) = \left ( \prod_{i=1}^{n} x_i \right )^{\frac{1}{n}}$$
+--
+
+$$s^* = \exp \left \{ \left [ \frac{1}{n-1} \sum_{i=1}^n \left [  \ln \left ( \frac{x_i}{\bar{x}^*}  \right ) \right ] ^2  \right ] ^\frac{1}{2} \right \}$$
+---
+# Distribuição Lognormal
+
+## Valores comuns de $s^*$
+
+$$1,4 \leq s^* \leq 3$$
+## Valores extremos de $s^*$
+
+$$1,1 \leq s^* \leq 33$$
+
+---
+
+# Distribuição Lognormal
+
+## Efeito de $\sigma$ na forma da distribuição
+
+```{r logs, echo = FALSE, dev='svg', fig.height=4}
+x <- seq(0, 3, 0.01)
+sigma <- c(2, 1.5, 1, .5, .25)
+y <- lapply(sigma, dlnorm, x = x, meanlog = log(1))
+data <- data.frame(x, y[[1]], y[[2]], y[[3]], y[[4]], y[[5]])
+colnames(data) <- c("x", "y1", "y2", "y3", "y4", "y5")
+data <- melt(data, id = 1)
+ggplot(data, aes(x = x, y = value, 
+                 color = factor(variable, labels = as.character(sigma)))) +
+  geom_line() +
+  scale_y_continuous(limits = c(0, max(data$value)), expand = c(0, 0)) + 
+  scale_x_continuous(limits = c(0, max(data$x)), expand = c(0, 0)) +
+  labs(title = "Distribuições lognormais",
+       subtitle = TeX("$\\mu = log(1) = 0$"),
+       color = TeX("$\\sigma$"))
 ```
 
+---
+
+# Estimativas
+
+--
+
+- O valor esperado (**média**) de $X$ é:
+
+$$E(X) = E(exp(Y)) = exp(E(Y) + 0,5\sigma^2)$$
+$$ E(x) = exp(\mu + 0,5\sigma^2)$$
+--
+
+- O valor da **mediana** é:
+
+$$\nu=exp(\mu)$$
+--
+
+- O valor da **moda** é:
+
+$$M_o=exp(\mu-\sigma^2)$$
+
+
 
 ---
+
+# Estimativas em função de $\hat{\sigma}$
+
+![Estimativas](estimativas.png)
+
+---
+
 # Regressão linear clássica
 
-## Origem
+### Origem
 
 > The word “regression” is an allusion to the famous comment of Sir Francis Galton in the late 1800s regarding “regression toward the mean.” This referred to the fact that tall parents tend to have children who are less tall closer to the mean – with a similar statement for short parents. The predictor variable here might be, say, the father’s height F, with the response variable being, say, the son’s height S. Galton was saying that E(S|F) < F.
 
-## Definição precisa
+### Definição precisa
 
 $$m_{Y ;X}(t) = \mathbb{E}(Y |X = t)$$
-## Notação
+### Notação
 
 $$\mu(t) = \beta_0 + \beta_1t_1 + ... + \beta_pt_p$$
 
@@ -237,3 +298,52 @@ abline(lm(exp(mfit$fitted.values) ~ exp(mfit$model[,1])), lty = 2)
 ---
 
 `r emo::ji("money")`
+
+---
+class: center, bottom, inverse
+
+# More info
+
+--
+
+Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
+
+--
+
+The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](https://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+
+--
+
+You can read the HTML source of this presentation to learn how it was built.
+
+--
+
+Or check out the R Markdown source at http://slides.yihui.name/xaringan/incremental.Rmd.
+
+--
+
+Have fun.
+
+--
+
+.
+
+--
+
+.
+
+--
+
+.
+
+--
+
+.
+
+--
+
+.
+
+--
+
+THE END
