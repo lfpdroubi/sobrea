@@ -38,6 +38,107 @@ background-image: url(https://raw.githubusercontent.com/lfpdroubi/dist_lognormal
 
 ---
 class: inverse, center, middle
+# ESTIMADORES
+
+---
+
+## Exemplo
+
+Sejam X e Y duas amostras de alturas de homens (X) e mulheres (Y). Assuma, por simplicidade que $\sigma_X = \sigma_Y = \sigma$ e que a médias das populações sejam iguais a $\mu_X$ e $\mu_Y$.
+
+--
+
+Suponha que, baseado nas amostras disponíveis, se pretenda estimar a altura de um homem qualquer na população.
+
+--
+
+A escolha natural seria: $T_1 = \bar{X}$
+
+--
+
+Porém, se a amostragem for pequena, poderíamos utilizar: $T_2 = \frac{\bar{X} + \bar{Y}}{2}$
+
+--
+
+Embora se saiba que $T_2$ é enviesada (mulheres são, em média, menores), temos:
+
+--
+
+* Viés de $T_1$: $\text{B}(T_1) = 0$
+* Viés de $T_2$: $B(T_2) = (0,5\mu_1 + 0,5\mu_2)-\mu_1$
+* Variância de $T_1$: $\text{Var}(T_1) = \sigma^2/n$
+* Variância de $T_2$: $\text{Var}^(T_2) = \text{Var}(0,5\bar{X} + 0,5\bar{Y}) = 0,5^2 \text{Var}(\bar{X}) + 0,5^2 \text{Var}(\bar{Y}) = \sigma^2/2n$
+
+--
+
+Como $\text{MSE}(\theta) = \text{Var}(\theta) + B^2(\theta)$:
+
+* $\text{MSE}(T_1) = \sigma^2/n + 0^2 = \sigma^2/n$
+* $\text{MSE}(T_2) = \sigma^2/2n + \left ( (0,5\mu_1 + 0,5\mu_2)-\mu_1 \right )^2 = \sigma^2/2n + \left ( \frac{\mu_2 - \mu_1}{2} \right )^2$
+
+---
+
+Como $\text{MSE}(\theta) = \text{Var}(\theta) + B^2(\theta)$:
+
+* $\text{MSE}(T_1) = \sigma^2/n + 0^2 = \sigma^2/n$
+* $\text{MSE}(T_2) = \sigma^2/2n + \left ( (0,5\mu_1 + 0,5\mu_2)-\mu_1 \right )^2 = \sigma^2/2n + \left ( \frac{\mu_2 - \mu_1}{2} \right )^2$
+
+--
+
+Portanto, $T_1$ somente será um melhor estimador que $T_2$ se:
+
+$$\left ( \frac{\mu_2 - \mu_1}{2} \right )^2 > \frac{\sigma^2}{2n}$$
+
+---
+
+Analogamente:
+
+--
+
+* $\text{Var}(\nu) = \text{Var}(\exp(W))$
+
+--
+
+* $\text{B}(\nu) = \nu - \mu  = \frac{\mu}{\exp(\sigma^2/2)} - \mu$
+
+--
+
+* $\text{Var}(\mu) = \text{Var}(\exp(W + \sigma^2/2)) = \text{Var}(\exp(W) .\exp(\sigma^2/2)) = \exp(\sigma^2)\text{Var}(\nu)$
+
+--
+
+* $B(\mu) = 0$
+
+--
+
+Então:
+
+--
+
+$\text{MSE}(\nu) = \text{Var}(\nu) + \text{B}^2(\nu) = \text{Var}(\nu) + \left ( \frac{\mu}{\exp(\sigma^2/2)} - \mu \right )^2$
+
+--
+
+$\text{MSE}(\mu) = \text{Var}(\mu) + \text{B}^2(\mu) = \exp(\sigma^2)\text{Var}(\nu)$
+
+--
+
+Logo, $\mu$ é um estimador melhor que $\nu$ se:
+
+$\text{Var}(\nu) + \left ( \frac{\mu}{\exp(\sigma^2/2)} - \mu \right )^2 > \exp(\sigma^2)\text{Var}(\nu)$
+
+---
+
+$$\text{Var}(\nu) = \text{Var}[\exp(W)]$$
+
+
+$$\text{Var}(\mu) = \text{Var} \left [ \exp \left ( W + \frac{\sigma^2}{2} \right ) \right ]$$
+Como $\text{Var}(c.U) = c^2 \text{Var}(U)$,
+
+$$\text{Var}(\mu) = \text{Var} \left [ \exp(W) . \exp \left ( \frac{\sigma^2}{2} \right ) \right ] = \exp^2 \left ( \frac{\sigma^2}{2} \right ).\text{Var}[\exp(W)] = \exp(\sigma^2).\text{Var}[\exp(W)]$$
+
+---
+class: inverse, center, middle
 
 # Distribuição Lognormal
 
