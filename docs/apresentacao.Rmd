@@ -253,7 +253,7 @@ Qual delas é a "melhor"?
 
 ### Distribuição Lognormal
 
-![Estimativas](estimativas.png)
+![Estimativas](estimativas_teorico.png)
 
 
 ---
@@ -265,7 +265,7 @@ class: inverse, center, middle
 
 ### Simulações
 
-![Dados simulados com diferentes valores de $\sigma$](..\Impacto_sigma_files\figure-html\unnamed-chunk-13-1.png)
+![](unnamed-chunk-13-1.png)
 
 ---
 ### Simulações
@@ -293,31 +293,31 @@ class: inverse, center, middle
 
 #### $\hat{Y}$ vs. $\sigma^*$
 
-![Dados simulados com diferentes valores de $\sigma$](..\Impacto_sigma_files\figure-html\estimativas.png)
+![](estimativas.png)
 ---
 ### Simulações
 
 #### $\overline{RMSE}(\sigma^*)$
 
-![](..\Impacto_sigma_files\figure-html\unnamed-chunk-49-1.png)
+![](unnamed-chunk-49-1.png)
 ---
 
 ### Simulações
 
 #### $\overline{RMSE}(\sigma^*)$
 
-![](..\Impacto_sigma_files\figure-html\unnamed-chunk-50-2.png)
+![](unnamed-chunk-50-2.png)
 
 ---
 
 ### Simulações
 
-![](..\Impacto_sigma_files\figure-html\simulacoes.png)
+![](simulacoes.png)
 
 ---
 ### Simulações
 
-![](..\Impacto_sigma_files\figure-html\simulacoes_1.png)
+![](simulacoes_1.png)
 
 ---
 class: inverse, center, middle
@@ -349,7 +349,7 @@ leaflet(centro_2015) %>%
 
 #### Histograma da Variável Dependente
 
-![Histograma](..\Impacto_sigma_files\figure-html\unnamed-chunk-2-1.png)
+![Histograma](unnamed-chunk-2-1.png)
 ---
 ### Exemplo
 
@@ -474,8 +474,6 @@ $\text{MSE}(\mu) = \text{Var}(\mu) + \text{B}^2(\mu) = \exp(\sigma^2)\text{Var}(
 ---
 
 $\text{MSE}(\nu) = \text{Var}(\nu) + \text{B}^2(\nu) = \text{Var}(\nu) + \left ( \frac{\mu}{\exp(\sigma^2/2)} - \mu \right )^2$
-
---
 
 $\text{MSE}(\mu) = \text{Var}(\mu) + \text{B}^2(\mu) = \exp(\sigma^2)\text{Var}(\nu)$
 
