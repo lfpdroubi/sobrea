@@ -34,7 +34,7 @@ library(reshape2)
 theme_set(theme_bw())
 ```
 
-background-image: url(https://raw.githubusercontent.com/lfpdroubi/dist_lognormal/master/images/densidade_medidas-1.png)
+background-image: url(densidade_medidas-1.png)
 
 ---
 class: inverse, center, middle
@@ -107,6 +107,9 @@ $$\mathbb{E}[Y|X] = \exp(\alpha + X\beta)\mathbb{E}[\exp(\epsilon)|X]$$
 
 ##### A desigualdade de Jensen
 
+
+--
+
 Se $\varphi(X)$ é convexa:
 
 $\varphi \left(\mathbb{E} [X]\right)\leq \mathbb{E} \left[\varphi (X)\right].$
@@ -151,7 +154,7 @@ $$\Leftrightarrow c = E[W]$$
 --
 2. $c = f(X)$
 
-$$MSPE = \mathbb{E}[(Y-f(X))^2] = \mathbb{E}[\mathbb{E}[(Y-f(X))^2|X]$$
+$$MSPE = \mathbb{E}[(Y-f(X))^2] = \mathbb{E}[\mathbb{E}[(Y-f(X))^2|X]]$$
 
 --
 A função $f(X)$ que minimiza $\mathbb{E}[(Y-f(X))^2]$, por analogia ao item anterior, é a função $E(Y|X)$, ou seja, a média, *i.e.* $\mu(t)$. Então, a expectativa total $\mathbb{E}[\mathbb{E}[(Y-f(X))^2|X]]$, também é minimizada com este valor.
@@ -248,6 +251,10 @@ $$M_o=exp(\mu-\sigma^2)$$
 --
 
 Qual delas é a "melhor"?
+
+--
+
+**ALERTA:** Cuidado com a heteroscedasticidade - $\sigma \neq \text{cte}$
 
 ---
 
@@ -375,6 +382,22 @@ htmlreg(fit, doctype = FALSE,
 ---
 ### Exemplo
 
+#### RMSPE (Root Mean Squared Prediction Error)
+
+--
+
+$\text{RMSPE}_{\mu} =$ R$203.939,11
+
+--
+
+$\text{RMSPE}_{\nu} =$ R$204.006,84
+
+--
+
+$\text{RMSPE}_{Mo} =$ R$205.537,36
+---
+### Exemplo
+
 #### Impacto do erro-padrão da regressão na estimativa
 
 |  Estimativa / Erro-Padrão | 0,136      |0,25       | 0,5         | 0,75       |
@@ -384,6 +407,15 @@ htmlreg(fit, doctype = FALSE,
 | Mediana                   | 961.660,64 |961.660,64 |961.660,64   |961.660,64  |
 | Média                     | 970.607,51 |992.187,03 |1.089.704,27 |1.273.993,36|
 | Dif. em relação à Mediana | +0,93%     | +3,17%    | +13,31%     | +32,48%    |
+
+
+---
+class: inverse, center, middle
+# CONCLUSÃO
+
+---
+
+![Estimativas](estimativas_teorico.png)
 
 ---
 class: inverse, center, middle
